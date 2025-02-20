@@ -9,7 +9,7 @@ import testBase.baseClass;
 
 public class TC002AddProductCatalog extends baseClass{
 
-	@Test()
+	@Test(groups="regression")
 	public void addproduct() throws InterruptedException
 	{
 		logger.info("starting addproduct testcase");
