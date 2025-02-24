@@ -1,6 +1,12 @@
 package testCases;
 
+import java.util.HashMap;
+import java.util.List;
+
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import com.sun.net.httpserver.Authenticator.Retry;
 
 import jdk.internal.org.jline.utils.Log;
 import pageObjects.loginPage;
@@ -9,12 +15,12 @@ import testBase.baseClass;
 
 public class TC001_LoginTest extends baseClass{
 
-	@Test()
-	public void verifylogin() throws InterruptedException
+	@Test(groups={"sanity","regression"},retryAnalyzer=utilities.Retry.class,dataProvider="jsondata")
+	public void verifylogin(HashMap<String,String> input) throws InterruptedException
 	{
 		logger.info("Starting login testcase");
 		loginPage lp=new loginPage(driver);
-		lp.login("saanvi@gmail.com", "P@55word");
+		lp.login(input.get("email"), input.get("password"));
 		logger.info("Entered username and password");
 		
 		
@@ -22,5 +28,11 @@ public class TC001_LoginTest extends baseClass{
 	
 	}
 
-	
+	@DataProvider
+	 public Object[][] jsondata() throws Exception
+	{
+		List<HashMap<String,String>> data = getJsonDataToMap(".\\Selenium\\testData\\login.json");
+		
+		return new Object[][] {{data.get(0)},{data.get(1)}};
+	}
 }

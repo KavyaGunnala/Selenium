@@ -18,6 +18,8 @@ public class productCatalog extends basePage{
 	
 	@FindBy(css =".mb-3")
 	List<WebElement> productlist;
+	@FindBy(xpath="/html/body/app-root/app-dashboard/app-sidebar/nav/ul/li[5]/button")
+	WebElement signout;
 	By toast=By.cssSelector(".mb-3");
 	public List<WebElement> getproductlist()
 	{
@@ -40,6 +42,10 @@ public class productCatalog extends basePage{
 		visibilityOfElementLocated(toast);
 		Thread.sleep(3000);
 
-	
+	}
+
+	public void logoutbutton()
+	{
+	signout.click();
 }
-}
+	}
